@@ -1,0 +1,734 @@
+/* Global Styles and Variables */
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.08);
+  --border-radius: 16px;
+  --animation-duration: 0.3s;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/* App Container */
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header Styles */
+.header {
+  text-align: center;
+  color: white;
+  margin-bottom: 1rem;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.header-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+.header h1 {
+  font-size: 3rem;
+  margin: 0.5rem 0;
+  font-weight: 700;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(45deg, #fff, #f0f0f0);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin: 0;
+  opacity: 0.9;
+  font-weight: 300;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Upload Section */
+.upload-section {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 3px dashed #ddd;
+  border-radius: var(--border-radius);
+  padding: 3rem 2rem;
+  cursor: pointer;
+  transition: all var(--animation-duration) ease;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.upload-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.upload-section:hover::before {
+  left: 100%;
+}
+
+.upload-section:hover {
+  border-color: #667eea;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.upload-section.drag-over {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  transform: scale(1.02);
+}
+
+.upload-section.has-file {
+  border-color: #28a745;
+  background: rgba(40, 167, 69, 0.05);
+}
+
+.file-input-hidden {
+  display: none;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.upload-placeholder {
+  text-align: center;
+}
+
+.upload-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.upload-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.upload-text strong {
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.upload-text span {
+  color: #666;
+  font-size: 1rem;
+}
+
+.upload-formats {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.file-selected {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(40, 167, 69, 0.1);
+  border-radius: 12px;
+  border: 2px solid rgba(40, 167, 69, 0.2);
+}
+
+.file-icon {
+  font-size: 2rem;
+}
+
+.file-info {
+  flex: 1;
+  text-align: left;
+}
+
+.file-name {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.file-size {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.change-file {
+  color: #667eea;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+
+/* Controls Section */
+.controls {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.frame-selector h3 {
+  margin: 0 0 1.5rem 0;
+  color: #333;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.radio-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.radio-option {
+  position: relative;
+  cursor: pointer;
+  padding: 1.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  transition: all var(--animation-duration) ease;
+  background: white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.radio-option:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.radio-option.selected {
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  box-shadow: var(--shadow-sm);
+}
+
+.radio-option input[type="radio"] {
+  display: none;
+}
+
+.radio-custom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  position: relative;
+  transition: all var(--animation-duration) ease;
+}
+
+.radio-option.selected .radio-custom {
+  border-color: #667eea;
+  background: #667eea;
+}
+
+.radio-option.selected .radio-custom::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+}
+
+.radio-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.radio-icon {
+  font-size: 1.5rem;
+}
+
+.radio-label {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Buttons */
+.extract-button, .download-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all var(--animation-duration) ease;
+  position: relative;
+  overflow: hidden;
+  min-width: 200px;
+  justify-content: center;
+}
+
+.extract-button {
+  background: var(--primary-gradient);
+  box-shadow: var(--shadow-sm);
+}
+
+.extract-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.extract-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.extract-button.processing {
+  background: #6c757d;
+}
+
+.download-button {
+  background: var(--success-gradient);
+  box-shadow: var(--shadow-sm);
+}
+
+.download-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.button-icon {
+  font-size: 1.2rem;
+}
+
+.button-text {
+  position: relative;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+/* Result Section */
+.result-section {
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.result-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.result-card h3 {
+  margin: 0 0 1.5rem 0;
+  color: #333;
+  font-size: 1.4rem;
+}
+
+.image-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.extracted-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  display: block;
+  transition: transform var(--animation-duration) ease;
+}
+
+.image-container:hover .extracted-image {
+  transform: scale(1.02);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .app {
+    max-width: 95%;
+    padding: 1.5rem;
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+  
+  .header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .upload-section {
+    padding: 2rem 1rem;
+  }
+  
+  .upload-icon {
+    font-size: 2.5rem;
+  }
+  
+  .upload-text strong {
+    font-size: 1.1rem;
+  }
+  
+  .radio-group {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .radio-option {
+    padding: 1rem;
+  }
+  
+  .radio-content {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .extract-button, .download-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    min-width: 180px;
+  }
+  
+  .file-selected {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  
+  .controls, .result-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .app {
+    padding: 0.75rem;
+    gap: 1.25rem;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+  }
+  
+  .header-icon {
+    font-size: 3.5rem;
+  }
+  
+  .upload-section {
+    padding: 1.5rem 1rem;
+  }
+  
+  .radio-option {
+    padding: 0.875rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .radio-custom {
+    align-self: center;
+  }
+  
+  .radio-content {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .extract-button, .download-button {
+    width: 100%;
+    padding: 1rem;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 0.5rem;
+    gap: 1rem;
+  }
+  
+  .header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .header-icon {
+    font-size: 3rem;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .upload-section {
+    padding: 1.25rem 0.75rem;
+  }
+  
+  .upload-icon {
+    font-size: 2rem;
+  }
+  
+  .upload-text strong {
+    font-size: 1rem;
+  }
+  
+  .upload-text span {
+    font-size: 0.9rem;
+  }
+  
+  .upload-formats {
+    font-size: 0.8rem;
+  }
+  
+  .controls, .result-card {
+    padding: 1.25rem;
+  }
+  
+  .frame-selector h3 {
+    font-size: 1.1rem;
+  }
+  
+  .radio-option {
+    padding: 0.75rem;
+  }
+  
+  .radio-icon {
+    font-size: 1.25rem;
+  }
+  
+  .radio-label {
+    font-size: 0.9rem;
+  }
+  
+  .button-icon {
+    font-size: 1rem;
+  }
+  
+  .extract-button, .download-button {
+    padding: 0.875rem;
+    font-size: 0.95rem;
+  }
+  
+  .result-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .extracted-image {
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 360px) {
+  .app {
+    padding: 0.25rem;
+  }
+  
+  .header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .header-icon {
+    font-size: 2.5rem;
+  }
+  
+  .upload-section {
+    padding: 1rem 0.5rem;
+  }
+  
+  .controls, .result-card {
+    padding: 1rem;
+  }
+  
+  .radio-group {
+    gap: 0.75rem;
+  }
+  
+  .radio-option {
+    padding: 0.625rem;
+  }
+  
+  .extract-button, .download-button {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .extracted-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .header {
+    margin-bottom: 0.5rem;
+  }
+  
+  .header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .header-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .app {
+    gap: 1rem;
+  }
+  
+  .upload-section {
+    padding: 1.5rem 1rem;
+  }
+  
+  .controls {
+    padding: 1.25rem;
+  }
+  
+  .result-card {
+    padding: 1.25rem;
+  }
+  
+  .extracted-image {
+    max-height: 250px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .app {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .header, .upload-section, .controls {
+    display: none !important;
+  }
+  
+  .result-section {
+    animation: none !important;
+  }
+  
+  .result-card {
+    background: white !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+}
