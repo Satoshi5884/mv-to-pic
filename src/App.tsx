@@ -3,7 +3,10 @@ import './App.css'
 
 function App() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const [framePosition, setFramePosition] = useState<'first' | 'last'>('last')
+  const [framePosition, setFramePosition] = useState<'first' | 'last' | 'custom'>('last')
+  const [customFrameNumber, setCustomFrameNumber] = useState<number>(0)
+  const [customSeconds, setCustomSeconds] = useState<number>(0)
+  const [videoFrameRate, setVideoFrameRate] = useState<number>(30)
   const [extractedImageUrl, setExtractedImageUrl] = useState<string | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
   const [isDragOver, setIsDragOver] = useState(false)
@@ -65,10 +68,18 @@ function App() {
         canvas.width = video.videoWidth
         canvas.height = video.videoHeight
         
+        // フレームレートを推定（概算）
+        const estimatedFrameRate = 30 // デフォルト値
+        setVideoFrameRate(estimatedFrameRate)
+        
         if (framePosition === 'first') {
           video.currentTime = 0
-        } else {
+        } else if (framePosition === 'last') {
           video.currentTime = video.duration - 0.1
+        } else if (framePosition === 'custom') {
+          // カスタム位置を秒数で指定
+          const targetTime = Math.min(customSeconds, video.duration - 0.1)
+          video.currentTime = Math.max(0, targetTime)
         }
         
         video.onseeked = () => {
@@ -176,7 +187,59 @@ function App() {
                   <div className="radio-label">最後のフレーム</div>
                 </div>
               </label>
+              <label className={`radio-option ${framePosition === 'custom' ? 'selected' : ''}`}>
+                <input
+                  type="radio"
+                  value="custom"
+                  checked={framePosition === 'custom'}
+                  onChange={(e) => setFramePosition(e.target.value as 'first' | 'last' | 'custom')}
+                />
+                <div className="radio-custom"></div>
+                <div className="radio-content">
+                  <div className="radio-icon">🎯</div>
+                  <div className="radio-label">指定位置</div>
+                </div>
+              </label>
             </div>
+            
+            {framePosition === 'custom' && (
+              <div className="custom-controls">
+                <div className="input-group">
+                  <label htmlFor="frame-input">フレーム番号:</label>
+                  <input
+                    id="frame-input"
+                    type="number"
+                    min="0"
+                    value={customFrameNumber}
+                    onChange={(e) => {
+                      const frameNum = parseInt(e.target.value) || 0
+                      setCustomFrameNumber(frameNum)
+                      setCustomSeconds(frameNum / videoFrameRate)
+                    }}
+                    className="frame-input"
+                  />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="seconds-input">秒数:</label>
+                  <input
+                    id="seconds-input"
+                    type="number"
+                    min="0"
+                    step="0.1"
+                    value={customSeconds}
+                    onChange={(e) => {
+                      const seconds = parseFloat(e.target.value) || 0
+                      setCustomSeconds(seconds)
+                      setCustomFrameNumber(Math.round(seconds * videoFrameRate))
+                    }}
+                    className="seconds-input"
+                  />
+                </div>
+                <div className="framerate-info">
+                  フレームレート: {videoFrameRate} fps
+                </div>
+              </div>
+            )}
           </div>
           
           <button

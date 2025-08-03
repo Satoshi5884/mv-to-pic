@@ -210,7 +210,7 @@ body {
 
 .radio-group {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
   margin-bottom: 2rem;
 }
@@ -442,6 +442,58 @@ body {
   }
 }
 
+/* Custom Controls */
+.custom-controls {
+  background: rgba(102, 126, 234, 0.05);
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.input-group:last-of-type {
+  margin-bottom: 0.5rem;
+}
+
+.input-group label {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.frame-input, .seconds-input {
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all var(--animation-duration) ease;
+  background: white;
+}
+
+.frame-input:focus, .seconds-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.framerate-info {
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 6px;
+  margin-top: 0.5rem;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .app {
@@ -451,6 +503,10 @@ body {
   
   .header h1 {
     font-size: 2.5rem;
+  }
+  
+  .radio-group {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -483,6 +539,14 @@ body {
   .radio-group {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+  
+  .custom-controls {
+    padding: 1rem;
+  }
+  
+  .input-group {
+    margin-bottom: 0.75rem;
   }
   
   .radio-option {
