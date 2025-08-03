@@ -263,10 +263,33 @@ function App() {
             <div className="image-container">
               <img src={extractedImageUrl} alt="抽出されたフレーム" className="extracted-image" />
             </div>
-            <button onClick={downloadImage} className="download-button">
-              <span className="button-icon">💾</span>
-              <span className="button-text">画像をダウンロード</span>
-            </button>
+            <div className="action-buttons">
+              <button onClick={downloadImage} className="download-button">
+                <span className="button-icon">💾</span>
+                <span className="button-text">画像をダウンロード</span>
+              </button>
+              <div className="ai-services">
+                <span className="ai-services-label">AI動画生成に使用:</span>
+                <div className="ai-links">
+                  <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" className="ai-link">
+                    <span className="ai-icon">🧠</span>
+                    <span>Gemini</span>
+                  </a>
+                  <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" className="ai-link">
+                    <span className="ai-icon">🤖</span>
+                    <span>Google AI Studio</span>
+                  </a>
+                  <a href="https://sora.chatgpt.com/" target="_blank" rel="noopener noreferrer" className="ai-link">
+                    <span className="ai-icon">🎬</span>
+                    <span>Sora</span>
+                  </a>
+                  <a href="https://www.midjourney.com/" target="_blank" rel="noopener noreferrer" className="ai-link">
+                    <span className="ai-icon">🎨</span>
+                    <span>Midjourney</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
