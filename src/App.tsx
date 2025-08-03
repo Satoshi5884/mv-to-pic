@@ -269,7 +269,7 @@ function App() {
                 <span className="button-text">画像をダウンロード</span>
               </button>
               <div className="ai-services">
-                <span className="ai-services-label">AI動画生成に使用:</span>
+                <span className="ai-services-label">AI動画生成等に使用:</span>
                 <div className="ai-links">
                   <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" className="ai-link">
                     <span className="ai-icon">🧠</span>
@@ -286,6 +286,10 @@ function App() {
                   <a href="https://www.midjourney.com/" target="_blank" rel="noopener noreferrer" className="ai-link">
                     <span className="ai-icon">🎨</span>
                     <span>Midjourney</span>
+                  </a>
+                  <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="ai-link">
+                    <span className="ai-icon">🤖</span>
+                    <span>ChatGPT</span>
                   </a>
                 </div>
               </div>
